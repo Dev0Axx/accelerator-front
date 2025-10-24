@@ -1,35 +1,68 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { CssBaseline, Box, Typography } from '@mui/material'
+import { ThemeProvider } from './contexts/ThemeContext'
+import MainLayout from './layouts/MainLayout'
+import HomePage from './pages/HomePage/HomePage'
+
+const CatchPage = () => (
+	<Box>
+		<Typography variant='h4' gutterBottom>
+			Ввод улова
+		</Typography>
+		<Typography variant='body1'>
+			Форма для ввода улова будет здесь...
+		</Typography>
+	</Box>
+)
+
+const MyCatchesPage = () => (
+	<Box>
+		<Typography variant='h4' gutterBottom>
+			Мои уловы
+		</Typography>
+		<Typography variant='body1'>
+			Таблица с историей уловов будет здесь...
+		</Typography>
+	</Box>
+)
+
+const OverviewPage = () => (
+	<Box>
+		<Typography variant='h4' gutterBottom>
+			Обзор уловов
+		</Typography>
+		<Typography variant='body1'>
+			Общая статистика по всем уловам будет здесь...
+		</Typography>
+	</Box>
+)
+
+const QuotasPage = () => (
+	<Box>
+		<Typography variant='h4' gutterBottom>
+			Управление квотами
+		</Typography>
+		<Typography variant='body1'>Настройка квот будет здесь...</Typography>
+	</Box>
+)
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+	return (
+		<ThemeProvider>
+			<CssBaseline />
+			<Router>
+				<MainLayout>
+					<Routes>
+						<Route path='/' element={<HomePage />} />
+						<Route path='/catch' element={<CatchPage />} />
+						<Route path='/my-catches' element={<MyCatchesPage />} />
+						<Route path='/overview' element={<OverviewPage />} />
+						<Route path='/quotas' element={<QuotasPage />} />
+					</Routes>
+				</MainLayout>
+			</Router>
+		</ThemeProvider>
+	)
 }
 
 export default App
